@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <link rel="stylesheet" href="static/layui/css/layui.css">
+    <script src="static/js/jquery.3.3.1.js"></script>
+    <script src="static/layui/layui.js"></script>
+    <title>首页</title>
+</head>
+<body>
+
+<ul class="layui-nav">
+    <li class="layui-nav-item"><a href="">首页</a></li>
+</ul>
+
+
+<script>
+
+    layui.use('element', function(){
+        var element = layui.element; //导航的hover效果、二级菜单等功能，需要依赖element模块
+
+        //监听导航点击
+        element.on('nav(demo)', function(elem){
+            //console.log(elem)
+            layer.msg(elem.text());
+        });
+    });
+
+</script>
