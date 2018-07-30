@@ -1,0 +1,121 @@
+{include file="public/header" /}
+
+
+<style>
+
+    .content{
+        margin-top: 20px;
+    }
+
+    .add-div{
+        text-align: right;
+    }
+
+    .add-botton{
+        border: 1px solid #ffffff;
+        background-color: #00b6f1;
+        color: #fff;
+    }
+
+</style>
+
+
+<div class="layui-row">
+
+    <div class="layui-col-xs12 layui-col-sm12 layui-col-md10 layui-col-md-offset1">
+
+        <form class="layui-form">
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">日期</label>
+                <div class="layui-input-inline">
+                    <input type="text" class="layui-input date" id="test1" placeholder="选择日期">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">时间</label>
+                <div class="layui-input-inline">
+                    <input type="text" class="layui-input time" id="test2" placeholder="选择时间">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">描述</label>
+                <div class="layui-input-block">
+                    <textarea placeholder="请输入内容" class="layui-textarea description"></textarea>
+                </div>
+            </div>
+
+            <button class="layui-btn layui-btn-radius btn-submit" onclick="return false">保存</button>
+        </form>
+
+    </div>
+
+</div>
+
+
+<script>
+    $().ready(function () {
+
+
+        // 保存事件
+        $('.btn-submit').click(function () {
+
+            // 获取时间
+            var date = $('.date').val();
+            var time = $('.time').val();
+            var description = $('.description').val();
+
+            var happen_time = date+' '+time;
+
+            var url = '/api/notic/add';
+
+            $.post(
+                url,
+                {
+                    happen_time:happen_time,
+                    description:description
+                },
+                function(result){
+
+                    if (result.code ==0){
+                        layer.msg(result.msg);
+                    }else{
+                        layer.msg(result.msg);
+                    }
+                }
+            );
+
+        });
+
+
+        layui.use('laydate', function() {
+            var laydate = layui.laydate;
+
+            //常规用法
+            laydate.render({
+                elem: '#test1'
+                ,value:new Date()
+            });
+
+            //常规用法
+            laydate.render({
+                elem: '#test2'
+                ,type:'time'
+                ,format: 'HH:mm' //可任意组合
+                ,isInitValue: true
+            });
+
+
+        });
+
+
+
+    })
+
+
+</script>
+
+
+{include file="public/footer" /}

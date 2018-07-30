@@ -10,3 +10,20 @@
 // +----------------------------------------------------------------------
 
 // 应用公共文件
+
+
+/**
+ * 自定义ajax返回数据
+ * @param int $code
+ * @param string $msg
+ */
+function ajaxRes($code =0,$msg = ''){
+
+    $returnArr = [
+        'code' =>$code,
+        'msg' =>$msg
+    ];
+
+    $json = json_encode($returnArr);
+    die($json);
+}
